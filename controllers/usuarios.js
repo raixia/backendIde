@@ -113,6 +113,22 @@ const actualizarUsuario = async (req = request, res = response) => {
 
 
 }
+const cambiarRoles=async (req=request,res=response)=>{
+    const id=req.params.id
+    const rol = req.body.rol
+    const usuariodb = await Usuario.findByIdAndUpdate(id,{rol:rol},{new:true})
+    if(!usuariodb){
+        res.status(404).json({
+            ok:false,
+            msg:'el usuario no se pudo actualizar o no se pudo encontrar'
+        })
+    }
+    res.json({
+       ok:true,
+       usuariodb,
+       msg:'usuario actualizado' 
+    })
+}
 const estadoUsuario = async (req = request, res = response) => {
 
     const id = req.params.id
@@ -149,5 +165,6 @@ module.exports = {
     getUsuarios,
     actualizarUsuario,
     estadoUsuario,
-    getUusuarioxid
+    getUusuarioxid,
+    cambiarRoles
 }

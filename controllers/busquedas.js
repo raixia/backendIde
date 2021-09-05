@@ -27,6 +27,7 @@ const buscarUsuarios = async (termino = '', res = response) => {
         $or: [{ nombre: regex/*,estado:true*/ }, { correo: regex }]
     })
     res.json({
+        ok:true,
         results: usuarios
     })
 

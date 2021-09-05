@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { crearUsuario, getUsuarios, actualizarUsuario, DesactivarUsuario, estadoUsuario, getUusuarioxid } = require('../controllers/usuarios');
+const { crearUsuario, getUsuarios, actualizarUsuario, DesactivarUsuario, estadoUsuario, getUusuarioxid, cambiarRoles } = require('../controllers/usuarios');
 const { existeCorreo, existeidUsuario } = require('../helpers/ValidarUsuario');
 const { validarCampos, validarJWT, tieneRole, validarRolesAdmin, validarAdminRole } = require('../middlewares')
 const router = Router();
@@ -39,8 +39,14 @@ router.put('/:id', [
 ],
     actualizarUsuario
 )
-
-router.delete('/:id', [
+router.put('/roles/:id',[
+    validarJWT,
+    validarRolesAdmin,
+    validarCampos
+],
+cambiarRoles
+)
+router.put('/desactivar/:id', [
     validarJWT,
     validarAdminRole,
     check('id', 'No es un id de mongo').isMongoId(),
