@@ -6,10 +6,6 @@ const usuarioSchema = Schema({
         type:String,
         required:[true,'El nombre es obligatorio']
     },
-    img:{
-        type:String,
-
-    },
     correo:{
         type:String,
         required:[true,'El correo es obligatorio'],
