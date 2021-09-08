@@ -20,7 +20,6 @@ const buscarUsuarios = async (termino = '', res = response) => {
             ]
 
         })
-
     }
     const regex = new RegExp(termino, 'i')
     const usuarios = await Usuario.find({

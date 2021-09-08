@@ -10,7 +10,8 @@ class Server{
             uploads:'/api/uploads',
             auth:'/api/auth',
             buscar:'/api/buscar',
-            categoria:'/api/categoria'
+            categoria:'/api/categoria',
+            producto:'/api/producto'
         }
         this.conectaDB();
         this.middlewares();
@@ -28,8 +29,9 @@ class Server{
         this.app.use(this.paths.usuarios,require('../routes/usuario')),
         this.app.use(this.paths.uploads,require('../routes/uploads')),
         this.app.use(this.paths.auth,require('../routes/auth')),
-        this.app.use(this.paths.buscar,require('../routes/busquedas'))
-        this.app.use(this.paths.categoria,require('../routes/categoria'))
+        this.app.use(this.paths.buscar,require('../routes/busquedas')),
+        this.app.use(this.paths.categoria,require('../routes/categoria')),
+        this.app.use(this.paths.producto,require('../routes/producto'))
     }
     listen(){
         this.app.listen(this.port,()=>console.log('servidor corriendo en el puerto : '+this.port))

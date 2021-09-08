@@ -2,8 +2,13 @@ const { response, request } = require("express")
 const Categoria = require("../models/categorias")
 
 const mostrarCategoria = async (req = request, res = response) => {
-    const usuariosdb = await Categoria.find()
-    if (!usuariosdb) {
+    const { limite = 5, desde = 0 } = req.query
+
+    const [categoria, total] = await Promise.all([
+        Categoria.find().skip(Number(desde)).limit(Number(limite)),
+        Categoria.countDocuments()
+    ])
+    if (!categoria) {
         res.status(404).json({
             ok: false,
             msg: `hubo un problema con la consulta`
@@ -12,9 +17,23 @@ const mostrarCategoria = async (req = request, res = response) => {
     res.json({
         ok: true,
         msg: 'Categorias creadas',
-        usuariosdb
+        categoria,
+        total
     })
 
+}
+const listarCategoria = async (req, res = response) => {
+    const categoria = await Categoria.find();
+    if (!categoria) {
+        res.status(404).json({
+            ok: false,
+            msg: 'no se pudo encontrar esta peticion'
+        })
+    }
+    res.json({
+        ok: true,
+        categoria
+    })
 }
 const crearCategoria = async (req = request, res = response) => {
     const user = req.usuario._id
@@ -100,5 +119,6 @@ module.exports = {
     crearCategoria,
     actualizarCategoria,
     estadoCategoria,
-    mostrarCategoria
+    mostrarCategoria,
+    listarCategoria
 }

@@ -1,8 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { login, renovarToken } = require('../controllers/auth');
-const { crearCategoria, actualizarCategoria, estadoCategoria, mostrarCategoria } = require('../controllers/categoria');
-const { existeCorreo, NoexisteCorreo } = require('../helpers/ValidarUsuario');
+const { crearCategoria, actualizarCategoria, estadoCategoria, mostrarCategoria, listarCategoria } = require('../controllers/categoria');
 const { validarJWT, validarAdminRole } = require('../middlewares');
 const { validarCampos } = require('../middlewares/validar-campos');
 const router = Router();
@@ -10,12 +8,15 @@ const router = Router();
 
 
 router.get('/', [
-   /* validarJWT,
-    validarAdminRole,
-    validarCampos */
+    validarJWT,
+    validarCampos
 ],
     mostrarCategoria
 )
+router.get('/listar', [
+    validarJWT,
+    validarCampos
+], listarCategoria)
 
 router.post('/', [
     validarJWT,
