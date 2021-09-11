@@ -4,9 +4,6 @@ const { crearCategoria, actualizarCategoria, estadoCategoria, mostrarCategoria, 
 const { validarJWT, validarAdminRole } = require('../middlewares');
 const { validarCampos } = require('../middlewares/validar-campos');
 const router = Router();
-
-
-
 router.get('/', [
     validarJWT,
     validarCampos
