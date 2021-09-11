@@ -13,9 +13,12 @@ const inventarioSchema = Schema({
     UsuariosInv: {
         usuario: {
             type: Schema.Types.ObjectId,
-            ref: 'Usuario',
-            required: true
+            ref: 'Usuario'
         },
+    },
+    estado:{
+        type:Boolean,
+        default:true
     }
 }, { timestamps: true })
 module.exports = model('Inventario', inventarioSchema)

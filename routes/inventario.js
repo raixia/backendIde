@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { ActualizarSede, CrearSede, actualizarEstado, MostrarSedePag, mostrarSedeID } = require('../controllers/sedes');
+const { MostrarInventarioPag, mostrarInventarioID, CrearInventario, ActualizarInventario, actualizarEstadoInv } = require('../controllers/inventario');
 const { validarJWT, validarAdminRole, validarCampos } = require('../middlewares');
 const router = Router();
 
@@ -8,36 +8,35 @@ router.get('/', [
     validarJWT,
     validarCampos
 ],
-    MostrarSedePag
+    MostrarInventarioPag
 )
 router.get('/:id', [
     validarJWT,
     validarCampos
 ],
-    mostrarSedeID
+    mostrarInventarioID
 )
 router.post('/', [
     validarJWT,
     validarAdminRole,
-    check('nombre', 'El nombre debe ser obligatorio').not().isEmpty(),
-    check('direccion', 'La direccion es ser obligatoria').not().isEmpty(),
+    check('sede', 'La sede es obligatoria').not().isEmpty(),
+    check('sede', 'La sede no es un id de mongo').isMongoId(),
     validarCampos
 ],
-    CrearSede)
+    CrearInventario)
 router.put('/:id', [
     validarJWT,
     validarAdminRole,
-    check('nombre', 'El nombre debe ser obligatorio').not().isEmpty(),
-    check('direccion', 'La direccion es ser obligatoria').not().isEmpty(),
+    check('sede', 'La sede es obligatoria').not().isEmpty(),
+    check('sede', 'La sede no es un id de mongo').isMongoId(),
     validarCampos
 ],
-    ActualizarSede)
+    ActualizarInventario)
 router.put('/estado/:id', [
     validarJWT,
     validarAdminRole,
     check('estado', 'es estado es obligatorio').not().isEmpty(),
     validarCampos
 ],
-    actualizarEstado)
-
+    actualizarEstadoInv)
 module.exports = router

@@ -12,8 +12,8 @@ const Actualizar = async (Modelo, res, resto, id) => {
     if (!actualizar) {
         res.status(404).json({
             ok: false,
-            msg: 'Se actualizo correctamente',
-            ConsultaUpdate
+            msg: 'Se el id no se encontro',
+         //   ConsultaUpdate
         })
     }
     res.json({
