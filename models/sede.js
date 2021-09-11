@@ -5,7 +5,6 @@ const SedeSchema = Schema({
         type: String,
         required: [true, 'El nombre es obligatorio']
     },
-
     img: {
         type: Array,
         default: []
@@ -17,6 +16,11 @@ const SedeSchema = Schema({
     estado: {
         type: Boolean,
         default: true
+    },
+    usuario:{
+        type: Schema.Types.ObjectId,
+        ref:'Usuario',
+        required:true
     }
 })
 module.exports = model('Sede', SedeSchema)
