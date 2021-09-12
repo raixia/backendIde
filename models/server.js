@@ -13,7 +13,8 @@ class Server {
             categoria: '/api/categoria',
             producto: '/api/producto',
             sede: '/api/sede',
-            inventario: '/api/inventario'
+            inventario: '/api/inventario',
+            inventarioDetalle:'/api/inventarioDetalle'
         }
         this.conectaDB();
         this.middlewares();
@@ -35,7 +36,8 @@ class Server {
             this.app.use(this.paths.categoria, require('../routes/categoria')),
             this.app.use(this.paths.producto, require('../routes/producto')),
             this.app.use(this.paths.sede, require('../routes/sede')),
-            this.app.use(this.paths.inventario, require('../routes/inventario'))
+            this.app.use(this.paths.inventario, require('../routes/inventario')),
+            this.app.use(this.paths.inventarioDetalle, require('../routes/inventarioDetalle'))
     }
     listen() {
         this.app.listen(this.port, () => console.log('servidor corriendo en el puerto : ' + this.port))
